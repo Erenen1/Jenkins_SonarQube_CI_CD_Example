@@ -4,7 +4,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: "main", url: 'https://github.com/Erenen1/jenkins-nodejs-example.git'
+                //git branch: "main", url: 'https://github.com/Erenen1/jenkins-nodejs-example.git'
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/Erenen1/jenkins-nodejs-example.git',
+                        credentialsId: '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'
+                    ]]
+                ])
             }
         }
         stage('Install Dependencies') {
